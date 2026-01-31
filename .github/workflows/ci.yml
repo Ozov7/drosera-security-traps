@@ -11,15 +11,25 @@ jobs:
       
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
       
-      - name: Install dependencies
+      - name: Setup Foundry
         run: |
-          forge install openzeppelin/openzeppelin-contracts --no-commit
-          forge install foundry-rs/forge-std --no-commit
-          forge install drosera-network/drosera-contracts --no-commit
+          forge --version
+          cast --version
+      
+      - name: Install OpenZeppelin
+        run: forge install openzeppelin/openzeppelin-contracts --no-commit
+      
+      - name: Install Forge Std
+        run: forge install foundry-rs/forge-std --no-commit
+      
+      - name: Install Drosera Contracts
+        run: forge install drosera-network/drosera-contracts --no-commit
       
       - name: Build contracts
-        run: forge build
+        run: forge build --force
       
       - name: Run tests
         run: forge test -vvv
@@ -31,8 +41,8 @@ jobs:
         run: forge snapshot
       
       - name: Upload gas report
-        uses: actions/upload-artifact@v3
         if: always()
+        uses: actions/upload-artifact@v3
         with:
           name: gas-report
           path: .gas-snapshot
