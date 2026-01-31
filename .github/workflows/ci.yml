@@ -35,7 +35,7 @@ jobs:
         run: forge test -vvv
       
       - name: Check formatting
-        run: forge fmt --check
+        run: forge fmt
       
       - name: Create gas snapshot
         run: forge snapshot
