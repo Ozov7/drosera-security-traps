@@ -27,9 +27,6 @@ jobs:
       
       - name: Clean build cache
         run: forge clean  # ← ADD THIS LINE
-
-      - name: Install Drosera Contracts
-        run: forge install drosera-network/drosera-contracts
       
       - name: Build contracts
         run: forge build --force
