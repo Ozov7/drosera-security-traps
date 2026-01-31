@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {Trap} from "../../interfaces/ITrap.sol";
+import {Trap} from "../interfaces/ITrap.sol";
 
 /**
  * @title MEVSandwichDetector
@@ -70,7 +70,7 @@ contract MEVSandwichDetector is Trap {
         return abi.encode(swaps);
     }
     
-    function shouldRespond(
+    function evaluateResponse(
         bytes[] calldata data
     ) external pure override returns (bool, bytes memory) {
         // Planner safety
