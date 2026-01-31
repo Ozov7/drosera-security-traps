@@ -52,7 +52,7 @@ contract GovernanceAttackMonitor is Trap {
             return (false, bytes(""));
         }
         
-        (uint256 currentBlock, ) = abi.decode(data[0], (uint256, uint256));
+       (uint256 currentBlock, uint256 currentTimestamp) = abi.decode(data[0], (uint256, uint256));
         
         // Simplified detection: Alert every 100 blocks for demo
         if (currentBlock % 100 == 0) {
