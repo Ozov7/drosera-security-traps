@@ -24,12 +24,12 @@ contract GovernanceAttackMonitor is Trap {
     
     // ========== STRUCTS ==========
     struct GovernanceAlert {
-    uint256 proposalId;
-    address suspiciousAddress;
-    string alertType;           //
-    uint256 votingPowerChange;
-    uint256 timestamp;
-}
+        uint256 proposalId;
+        address suspiciousAddress;
+        string alertType;
+        uint256 votingPowerChange;
+        uint256 timestamp;
+    }
     
     // ========== CONSTRUCTOR ==========
     constructor() {
@@ -44,7 +44,9 @@ contract GovernanceAttackMonitor is Trap {
         return abi.encode(block.number, block.timestamp);
     }
     
-function shouldRespond(bytes[] calldata data) external view override returns (bool, bytes memory) {
+    function evaluateResponse(
+        bytes[] calldata data
+    ) external view override returns (bool, bytes memory) {
         // Planner safety
         if (data.length < 1 || data[0].length == 0) {
             return (false, bytes(""));
@@ -59,7 +61,7 @@ function shouldRespond(bytes[] calldata data) external view override returns (bo
             alert.suspiciousAddress = address(0);
             alert.alertType = "VOTING_POWER_SPIKE";
             alert.votingPowerChange = 1500;
-            alert.timestamp = currentTimestamp;  // 
+            alert.timestamp = currentTimestamp;
             
             return (true, abi.encode(alert));
         }
