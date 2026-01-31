@@ -1,34 +1,23 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-// Minimal Trap interface for compilation
-// Will be replaced with real drosera-contracts in production
-
-abstract contract ITrap {
+// Simple Trap interface for compilation
+interface ITrap {
     struct Log {
         bytes32[] topics;
         bytes data;
     }
     
-    function _addEventFilter(address, bytes32) external virtual;
-    function getFilteredLogs() external view virtual returns (Log[] memory);
-    function collect() external virtual view returns (bytes memory);
-    function evaluateResponse(bytes[] calldata data) external virtual view returns (bool, bytes memory);
+    // Functions that traps MUST implement
+    function collect() external view returns (bytes memory);
+    function evaluateResponse(bytes[] calldata data) external view returns (bool, bytes memory);
 }
 
-contract Trap is ITrap {
-    // Minimal implementations for compilation
-    function _addEventFilter(address, bytes32) internal override {}
-    
-    function getFilteredLogs() internal view override returns (Log[] memory) {
+// Simple abstract contract that traps inherit from
+abstract contract Trap is ITrap {
+    // These are internal helpers that traps can use
+    function _addEventFilter(address, bytes32) internal virtual {}
+    function getFilteredLogs() internal view virtual returns (Log[] memory) {
         return new Log[](0);
-    }
-    
-    function collect() external view override returns (bytes memory) {
-        return "";
-    }
-    
-    function evaluateResponse(bytes[] calldata) external view override returns (bool, bytes memory) {
-        return (false, "");
     }
 }
