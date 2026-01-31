@@ -46,9 +46,7 @@ contract OracleManipulationDetector is Trap {
         return abi.encode(chainlinkPrice, uniswapPrice, block.number);
     }
     
-    function evaluateResponse(
-        bytes[] calldata data
-    ) external pure override returns (bool, bytes memory) {
+function evaluateResponse(bytes[] calldata data) external view override returns (bool, bytes memory) {
         // Planner safety
         if (data.length < 1 || data[0].length == 0) {
             return (false, bytes(""));
