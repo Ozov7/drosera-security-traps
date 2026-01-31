@@ -26,7 +26,7 @@ jobs:
         run: forge install foundry-rs/forge-std
       
       - name: Clean build cache
-        run: forge clean  # ← ADD THIS LINE
+        run: forge clean
       
       - name: Build contracts
         run: forge build --force
@@ -34,7 +34,7 @@ jobs:
       - name: Run tests
         run: forge test -vvv
       
-      - name: Check formatting
+      - name: Auto-format code
         run: forge fmt
       
       - name: Create gas snapshot
@@ -42,7 +42,7 @@ jobs:
       
       - name: Upload gas report
         if: always()
-        uses: actions/upload-artifact@v4  # ← Change THIS LINE
+        uses: actions/upload-artifact@v4
         with:
           name: gas-report
           path: .gas-snapshot
