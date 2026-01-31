@@ -61,7 +61,7 @@ contract GovernanceAttackMonitor is Trap {
             alert.suspiciousAddress = address(0);
             alert.alertType = "VOTING_POWER_SPIKE";
             alert.votingPowerChange = 1500;
-            alert.timestamp = block.timestamp;
+            alert.timestamp = currentTimestamp;
             
             return (true, abi.encode(alert));
         }
