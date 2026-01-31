@@ -13,7 +13,7 @@ abstract contract ITrap {
     function _addEventFilter(address, bytes32) external virtual;
     function getFilteredLogs() external view virtual returns (Log[] memory);
     function collect() external virtual view returns (bytes memory);
-    function shouldRespond(bytes[] calldata data) external virtual view returns (bool, bytes memory);
+    function evaluateResponse(bytes[] calldata data) external virtual view returns (bool, bytes memory);
 }
 
 contract Trap is ITrap {
@@ -28,7 +28,7 @@ contract Trap is ITrap {
         return "";
     }
     
-    function shouldRespond(bytes[] calldata) external pure override returns (bool, bytes memory) {
+    function evaluateResponse(bytes[] calldata) external view override returns (bool, bytes memory) {
         return (false, "");
     }
 }
