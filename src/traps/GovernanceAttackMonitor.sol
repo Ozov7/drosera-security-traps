@@ -44,7 +44,7 @@ contract GovernanceAttackMonitor is Trap {
         return abi.encode(block.number, block.timestamp);
     }
     
-        function shouldRespond(
+            function shouldRespond(
         bytes[] calldata data
     ) external pure override returns (bool, bytes memory) {
         // Planner safety
@@ -52,7 +52,7 @@ contract GovernanceAttackMonitor is Trap {
             return (false, bytes(""));
         }
         
-       (uint256 currentBlock, uint256 currentTimestamp) = abi.decode(data[0], (uint256, uint256));
+        (uint256 currentBlock, uint256 currentTimestamp) = abi.decode(data[0], (uint256, uint256));
         
         // Simplified detection: Alert every 100 blocks for demo
         if (currentBlock % 100 == 0) {
@@ -61,7 +61,7 @@ contract GovernanceAttackMonitor is Trap {
             alert.suspiciousAddress = address(0);
             alert.alertType = "VOTING_POWER_SPIKE";
             alert.votingPowerChange = 1500;
-            alert.timestamp = currentTimestamp;
+            alert.timestamp = currentTimestamp;  // 
             
             return (true, abi.encode(alert));
         }
