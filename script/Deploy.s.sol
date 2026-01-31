@@ -16,35 +16,35 @@ contract DeployScript is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         
-        console.log("🚀 Starting deployment of Drosera Security Traps...");
-        console.log("================================================");
+console.log("Starting deployment of Drosera Security Traps..."); 
+console.log("================================================");
         
         vm.startBroadcast(deployerPrivateKey);
         
         // 1. Deploy the unified responder first
-        console.log("\n📦 Deploying Security Responder...");
+        console.log("\n Deploying Security Responder...");
         SecurityResponder responder = new SecurityResponder();
-        console.log("✅ Responder deployed at: %s", address(responder));
+        console.log(" Responder deployed at: %s", address(responder));
         
         // 2. Deploy MEV Sandwich Detector
-        console.log("\n🔍 Deploying MEV Sandwich Detector...");
+        console.log("\n Deploying MEV Sandwich Detector...");
         MEVSandwichDetector mevTrap = new MEVSandwichDetector();
-        console.log("✅ MEV Trap deployed at: %s", address(mevTrap));
+        console.log(" MEV Trap deployed at: %s", address(mevTrap));
         
         // 3. Deploy Governance Attack Monitor
-        console.log("\n🏛️ Deploying Governance Attack Monitor...");
+        console.log("\n Deploying Governance Attack Monitor...");
         GovernanceAttackMonitor govTrap = new GovernanceAttackMonitor();
-        console.log("✅ Governance Trap deployed at: %s", address(govTrap));
+        console.log(" Governance Trap deployed at: %s", address(govTrap));
         
         // 4. Deploy Oracle Manipulation Detector
-        console.log("\n📊 Deploying Oracle Manipulation Detector...");
+        console.log("\n Deploying Oracle Manipulation Detector...");
         OracleManipulationDetector oracleTrap = new OracleManipulationDetector();
-        console.log("✅ Oracle Trap deployed at: %s", address(oracleTrap));
+        console.log(" Oracle Trap deployed at: %s", address(oracleTrap));
         
         vm.stopBroadcast();
         
         // Generate drosera.toml configuration
-        console.log("\n🎯 ===== Drosera Configuration ===== ");
+        console.log("\n ===== Drosera Configuration ===== ");
         console.log("\n# MEV Sandwich Detector");
         console.log("[trap.mev_sandwich]");
         console.log("address = \"%s\"", address(mevTrap));
@@ -66,8 +66,8 @@ contract DeployScript is Script {
         console.log("response_function = \"handleOracleAlert\"");
         console.log("block_sample_size = 2");
         
-        console.log("\n📝 Deployment complete!");
-        console.log("👉 Update your drosera.toml with the addresses above");
-        console.log("👉 Register traps with Drosera Network");
+        console.log("\n Deployment complete!");
+        console.log(" Update your drosera.toml with the addresses above");
+        console.log(" Register traps with Drosera Network");
     }
 }
