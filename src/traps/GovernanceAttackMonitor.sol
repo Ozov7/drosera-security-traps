@@ -24,12 +24,12 @@ contract GovernanceAttackMonitor is Trap {
     
     // ========== STRUCTS ==========
     struct GovernanceAlert {
-        uint256 proposalId;
-        address suspiciousAddress;
-        string alertType;
-        uint256 votingPowerChange;
-        uint256 timestamp;
-    }
+    uint256 proposalId;
+    address suspiciousAddress;
+    string alertType;           //
+    uint256 votingPowerChange;
+    uint256 timestamp;
+}
     
     // ========== CONSTRUCTOR ==========
     constructor() {
