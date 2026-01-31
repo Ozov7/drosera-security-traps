@@ -44,7 +44,7 @@ contract GovernanceAttackMonitor is Trap {
         return abi.encode(block.number, block.timestamp);
     }
     
-    function shouldRespond(
+        function shouldRespond(
         bytes[] calldata data
     ) external pure override returns (bool, bytes memory) {
         // Planner safety
@@ -55,15 +55,13 @@ contract GovernanceAttackMonitor is Trap {
         (uint256 currentBlock, ) = abi.decode(data[0], (uint256, uint256));
         
         // Simplified detection: Alert every 100 blocks for demo
-        // In production, would analyze governance patterns
         if (currentBlock % 100 == 0) {
-            GovernanceAlert memory alert = GovernanceAlert({
-                proposalId: currentBlock,
-                suspiciousAddress: address(0), // Would extract from events
-                alertType: "VOTING_POWER_SPIKE",
-                votingPowerChange: 1500, // 15% increase
-                timestamp: block.timestamp
-            });
+            GovernanceAlert memory alert;
+            alert.proposalId = currentBlock;
+            alert.suspiciousAddress = address(0);
+            alert.alertType = "VOTING_POWER_SPIKE";
+            alert.votingPowerChange = 1500;
+            alert.timestamp = block.timestamp;
             
             return (true, abi.encode(alert));
         }
